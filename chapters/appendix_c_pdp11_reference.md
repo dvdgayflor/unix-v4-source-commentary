@@ -315,6 +315,7 @@ Address (octal)  Contents
 | 200 | RK disk |
 
 Each vector location contains two words:
+
 - Vector + 0: New PC
 - Vector + 2: New PSW
 

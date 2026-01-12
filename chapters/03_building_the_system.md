@@ -47,6 +47,7 @@ cc source.c
 ```
 
 This runs:
+
 1. `c0 source.c /tmp/ctm1` — Parse, produce intermediate
 2. `c1 /tmp/ctm1 /tmp/ctm2` — Generate assembly
 3. `as /tmp/ctm2` — Assemble to object
@@ -88,6 +89,7 @@ a.out header:
 ## Building the Kernel
 
 The kernel build process has three main steps:
+
 1. Configure devices (generate `l.s` and `c.c`)
 2. Assemble machine-dependent code
 3. Link everything together
@@ -265,6 +267,7 @@ echo l.s or c.c not found
 The kernel C code is pre-compiled into two libraries:
 
 **lib1** (~47KB) — Ken Thompson's kernel code:
+
 - `main.c` — Kernel initialization
 - `slp.c` — Scheduler, context switch
 - `trap.c` — Trap handler
@@ -277,6 +280,7 @@ The kernel C code is pre-compiled into two libraries:
 - And more...
 
 **lib2** (~40KB) — Dennis Ritchie's driver code:
+
 - `bio.c` — Buffer cache
 - `tty.c` — Terminal handling
 - `kl.c` — Console driver
@@ -379,6 +383,7 @@ cc -o prog a.o b.o -lc # Link with C library
 ```
 
 The C library (`lib/libc.a`) provides:
+
 - System call wrappers (`open`, `read`, `write`, etc.)
 - String functions (`strlen`, `strcmp`, etc.)
 - I/O functions (`printf`, `getchar`, etc.)
@@ -404,7 +409,7 @@ To modify and rebuild the kernel:
 
 4. **Reconfigure if devices changed**:
    ```sh
-   cd ../conf
+   chdir ../conf
    mkconf < config   # config file has device list
    ```
 

@@ -94,6 +94,7 @@ The key fields for UNIX:
 ### Current/Previous Mode (bits 14-15, 12-13)
 
 The PDP-11 has two modes:
+
 - **Kernel mode (00)** — Full access to all memory and instructions
 - **User mode (11)** — Restricted access, memory mapped through MMU
 
@@ -125,6 +126,7 @@ spl0();           /* Re-enable interrupts */
 ## Memory Layout
 
 With only 64KB of address space, UNIX uses the MMU to multiplex physical memory among:
+
 - The kernel
 - User processes (one at a time in memory)
 - I/O device registers
@@ -271,6 +273,7 @@ From `low.s`:
 ```
 
 When a trap occurs:
+
 1. Hardware pushes PC and PS onto the kernel stack
 2. Hardware loads new PC and PS from the vector
 3. Execution continues at the new PC (the `trap` routine)

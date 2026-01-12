@@ -338,6 +338,7 @@ Arguments are copied from user space into a kernel buffer. There's a 510-byte li
 ```
 
 The a.out header is read:
+
 - `0407` — Executable with combined text+data (not shared)
 - `0410` — Executable with separate, read-only text (sharable)
 
@@ -550,6 +551,7 @@ loop:
 ```
 
 `wait()` searches for zombie children. If found, it:
+
 1. Reads the exit status from swap
 2. Frees the swap space
 3. Clears the proc slot
@@ -679,6 +681,7 @@ wait(&status);
 ### Reference Counting
 
 When `fork()` copies a process, shared resources have their reference counts bumped:
+
 - Open files (`f_count`)
 - Text segments (`x_count`)
 - Inodes (`i_count`)
@@ -688,6 +691,7 @@ When `exit()` cleans up, these counts are decremented.
 ### The Zombie State
 
 A zombie is a process that has exited but hasn't been waited for:
+
 - Uses minimal resources (just a proc slot and swap block)
 - Contains exit status for parent
 - Cleaned up by parent's `wait()`

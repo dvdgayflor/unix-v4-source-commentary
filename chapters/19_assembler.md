@@ -94,6 +94,7 @@ Entry format:
 ```
 
 Types include:
+
 - Undefined (forward reference)
 - Absolute (constant)
 - Text segment
@@ -172,6 +173,7 @@ loop2:
 ### Code Generation
 
 For each instruction:
+
 1. Look up opcode in table
 2. Parse operands
 3. Encode addressing modes

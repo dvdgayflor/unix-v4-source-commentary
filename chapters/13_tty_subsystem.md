@@ -267,6 +267,7 @@ Read characters from raw queue until the delimiter (0377).
 ```
 
 Process editing characters:
+
 - **#** (CERASE): Back up one character
 - **@** (CKILL): Discard entire line, start over
 - **Ctrl-D** (CEOT): Mark end of file but don't include in output
@@ -425,6 +426,7 @@ Add carriage return before newline if CRMOD. Put character on output queue.
 ```
 
 Track column position and insert delays. Mechanical terminals need time for:
+
 - Carriage return (6 character times)
 - Newline (depends on column position)
 - Tab (depends on position)
@@ -632,6 +634,7 @@ if ((t_flags&RAW)==0 && (c==tp->t_quit || c==tp->t_intrup)) {
 ```
 
 In cooked mode:
+
 - **DEL** (0177) → SIGINT (interrupt)
 - **Ctrl-\** (034) → SIGQIT (quit with core dump)
 

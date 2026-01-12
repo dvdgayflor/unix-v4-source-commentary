@@ -54,6 +54,7 @@ struct cdevsw cdevsw[] {
 | Examples | Disks, tapes | Terminals, /dev/null |
 
 Many devices have both interfaces:
+
 - `/dev/rk0` — Block device (buffered)
 - `/dev/rrk0` — Character device (raw, unbuffered)
 
@@ -69,6 +70,7 @@ Many devices have both interfaces:
 ```
 
 Three pseudo-devices in one driver:
+
 - `/dev/mem` (minor 0) — Physical memory
 - `/dev/kmem` (minor 1) — Kernel virtual memory
 - `/dev/null` (minor 2) — Data sink/source
@@ -199,6 +201,7 @@ Virtual Address          Physical Address
 ```
 
 To access arbitrary physical memory:
+
 1. Save current UISA[0]
 2. Set UISA[0] = target page
 3. Access address 0-8KB (maps to target)
@@ -223,6 +226,7 @@ Both are character devices, but very different:
 ### Line Printer (lp.c)
 
 Output-only device:
+
 - `lpwrite()` — Send characters to printer
 - `lpstart()` — Start printing from output queue
 - `lpintr()` — Handle printer-ready interrupt

@@ -143,6 +143,7 @@ $ od -o a.out | head
 ```
 
 Breaking down the header:
+
 - 000407 = Magic (normal executable)
 - 000062 = Text size (50 bytes)
 - 000004 = Data size (4 bytes)
@@ -446,6 +447,7 @@ Object files (produced by the assembler before linking) use the same basic struc
 ### Object File Header
 
 Same as a.out header, but with different magic values:
+
 - 0407: Relocatable object with relocation info
 - 0410: Pure (read-only text) relocatable object
 

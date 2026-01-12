@@ -19,6 +19,7 @@ The shell is the user's interface to UNIX—a program that reads commands, parse
 ## Shell Overview
 
 The shell is a loop:
+
 1. Print prompt
 2. Read a line
 3. Parse into a syntax tree
@@ -604,6 +605,7 @@ if((f&fand) != 0) {
 ```
 
 Background processes:
+
 - Print PID and return immediately
 - Have stdin redirected from `/dev/null`
 - Ignore interrupt signals (`fint` flag)

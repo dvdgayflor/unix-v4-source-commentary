@@ -48,6 +48,7 @@ From `low.s`:
 ```
 
 Each vector is two words:
+
 - New PC: `trap` (the assembly routine)
 - New PS: `br7+N` where N identifies the trap type
 
@@ -177,6 +178,7 @@ Traps in kernel mode (except floating point) are fatal.
 ```
 
 A segmentation fault that's just past the stack can be handled by **automatic stack growth**:
+
 1. Back up the instruction
 2. Expand the stack segment by SINCR blocks
 3. Copy stack to new location
@@ -323,6 +325,7 @@ int sysent[]
 ```
 
 Each entry is two words:
+
 - **count** — Number of arguments
 - **call** — Pointer to handler function
 
@@ -396,6 +399,7 @@ User Program:
 ## Error Handling
 
 System calls report errors by:
+
 1. Setting `u.u_error` to an error code
 2. Setting the carry bit (EBIT) in the saved PS
 3. Returning the error code in r0

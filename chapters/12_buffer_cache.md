@@ -38,6 +38,7 @@ struct buf {
 ```
 
 Each buffer has two sets of links:
+
 - `b_forw`/`b_back` — Hash chain (by device + block number)
 - `av_forw`/`av_back` — Free list (LRU order)
 
@@ -59,6 +60,7 @@ With `NBUF=15`, the system has 15 buffers, each 514 bytes (512 data + 2 for word
 ```
 
 Key flags:
+
 - `B_BUSY` — Buffer is allocated to someone
 - `B_DONE` — I/O has completed (data is valid)
 - `B_DELWRI` — Buffer has been written but not yet flushed to disk
@@ -368,6 +370,7 @@ struct buf *bp;
 ```
 
 Mark the buffer as dirty (`B_DELWRI`) and release it. The actual write happens later, when:
+
 - The buffer is reclaimed by `getblk()`
 - `bflush()` is called (by `sync`)
 

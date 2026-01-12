@@ -112,6 +112,7 @@ int flag;
 ```
 
 The starting point depends on the first character:
+
 - `/etc/passwd` → start at root
 - `foo/bar` → start at current directory
 - `///foo` → start at root (extra slashes ignored)
@@ -150,6 +151,7 @@ If we've consumed the entire path with no errors, return the current inode.
 ```
 
 To traverse into a directory, it must:
+
 1. Actually be a directory (not a regular file)
 2. Have execute permission (the "search" permission for directories)
 
@@ -216,6 +218,7 @@ eloop:
 ```
 
 When the search exhausts all entries:
+
 - **Create mode** (`flag==1`) and at final component: Success! Return NULL with `u_pdir` pointing to parent directory. The offset indicates where to write the new entry.
 - **Otherwise**: File not found, return ENOENT.
 
@@ -440,6 +443,7 @@ Note that mount point handling actually happens in `iget()` (Chapter 9), not `na
   where /usr is a mount point
 
 namei traverses:
+
 1. / (root)
 2. usr → iget() sees IMOUNT, redirects to mounted fs root
 3. include

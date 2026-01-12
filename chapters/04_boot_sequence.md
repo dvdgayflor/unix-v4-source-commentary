@@ -72,6 +72,7 @@ The first instruction checks if the MMU is already enabled—if so, this is a re
 ```
 
 This creates identity mapping for the first 48KB: virtual address X maps to physical address X. Segment descriptors `077406` means:
+
 - Length = 127 blocks (8KB)
 - Access = read-write
 
@@ -196,6 +197,7 @@ This is machine code! It's the first program that process 1 executes:
 ```
 
 Disassembled:
+
 - `0104413` = `sys` instruction (exec is syscall 11, octal 013)
 - The rest are the arguments: path string and argv pointers
 
@@ -278,6 +280,7 @@ UNIX needs a clock for timekeeping and scheduling. This code:
 ```
 
 Process 0 is the **swapper** (scheduler). It's special:
+
 - `p_addr` — Points to the user structure (segment 6)
 - `p_size` — USIZE (16) blocks = 1024 bytes
 - `p_stat` — SRUN (runnable)
@@ -314,6 +317,7 @@ Now the kernel initializes its subsystems:
 | `iget(rootdev, ROOTINO)` | Get root directory inode |
 
 The root directory inode is retrieved twice:
+
 - `rootdir` — Global pointer used by `namei()`
 - `u.u_cdir` — Process 0's current directory
 
@@ -387,11 +391,13 @@ estabur(nt, nd, ns)    /* text, data, stack sizes (in 64-byte blocks) */
 ```
 
 `estabur()` (establish user registers) sets up the memory map for a process. It takes three sizes in 64-byte blocks:
+
 - `nt` — Text (code) size
 - `nd` — Data size
 - `ns` — Stack size
 
 First it checks:
+
 1. Total segments needed ≤ 8
 2. Total memory needed ≤ available
 

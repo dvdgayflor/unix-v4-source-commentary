@@ -248,6 +248,7 @@ int *ip;
 ```
 
 The classic UNIX permission algorithm:
+
 1. Check for read-only filesystem (for writes)
 2. Root (uid 0) bypasses all checks
 3. Check owner bits, group bits, or other bits depending on identity
@@ -297,6 +298,7 @@ struct inode *aip;
 ```
 
 Parameters are passed through the user structure:
+
 - `u.u_base` — User buffer address
 - `u.u_count` — Bytes to read
 - `u.u_offset` — File position
@@ -319,6 +321,7 @@ Character devices go directly to their driver's read routine.
 ```
 
 The 32-bit offset is converted:
+
 - `lbn` = offset / 512 (logical block number)
 - `on` = offset % 512 (byte within block)
 - `n` = bytes to transfer (at most to end of block)
@@ -414,6 +417,7 @@ Same block calculation as reading. `bmap()` will allocate new blocks if needed.
 ```
 
 Write strategy:
+
 - On error, just release the buffer
 - At block boundary, use async write (`bawrite`)—starts the I/O but doesn't wait
 - Mid-block, use delayed write (`bdwrite`)—buffer stays in cache until needed
@@ -485,6 +489,7 @@ Maximum file size: 03777 (octal) = 2047 blocks = ~1MB.
 For small files (ILARG not set), `i_addr[0-7]` are direct block pointers. This handles blocks 0-7.
 
 If block 8+ is requested, the file must be converted to large format:
+
 1. Allocate an indirect block
 2. Copy the 8 direct pointers into it
 3. Point `i_addr[0]` to the indirect block
@@ -657,6 +662,7 @@ cpass()
 ```
 
 These handle the byte-by-byte case:
+
 - `u.u_segflg=0`: User space, use `subyte`/`fubyte` (store/fetch user byte)
 - `u.u_segflg=1`: Kernel space, direct memory access
 - Update count, offset, and base pointer after each byte

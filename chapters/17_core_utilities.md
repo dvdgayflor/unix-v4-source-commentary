@@ -214,6 +214,7 @@ Copy loop: read 512 bytes, write them, repeat until EOF.
 ## ls — List Directory
 
 `ls` is the most complex utility here at 428 lines. It demonstrates:
+
 - Option parsing
 - Directory reading
 - stat() for file info
@@ -390,11 +391,13 @@ printf("%s\n", string);
 | Portability | PDP-11 only | Somewhat portable |
 
 Assembly was used for:
+
 - Frequently-used utilities (cat, echo)
 - Performance-critical code
 - Tiny programs where every byte mattered
 
 C was used for:
+
 - Complex logic (ls, cp with directory handling)
 - Maintainability requirements
 - Less performance-critical utilities

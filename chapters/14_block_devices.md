@@ -53,6 +53,7 @@ struct {
 ```
 
 A device number encodes:
+
 - **Major number**: Which driver (0=rk, 1=tm, etc.)
 - **Minor number**: Which unit or partition
 
@@ -61,6 +62,7 @@ For example, device 0407 = major 04, minor 07 = RK disk, unit 7.
 ## The RK05 Disk
 
 The RK05 is a cartridge disk:
+
 - **Capacity**: 2.4 MB per pack
 - **Geometry**: 203 cylinders × 2 surfaces × 12 sectors
 - **Block size**: 512 bytes (256 words)
@@ -218,6 +220,7 @@ struct buf *bp;
 ```
 
 Converts a linear block number to RK05 physical address:
+
 - Sector = block % 12
 - Cylinder = block / 12
 - Pack into: `(drive << 13) | (cylinder << 4) | sector`
@@ -249,6 +252,7 @@ Check for errors. Write-lock errors are fatal; others retry up to 10 times.
 ```
 
 Two types of interrupts:
+
 1. **Seek complete** (SEEKCMP): Start the data transfer using `devstart()`
 2. **Transfer complete**: Call `rkpost()` to finish up
 

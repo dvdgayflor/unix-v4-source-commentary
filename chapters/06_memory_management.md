@@ -45,6 +45,7 @@ Swap Space:
 ```
 
 Key characteristics:
+
 - **No paging** — Entire processes are swapped, not individual pages
 - **No sharing** — Except for read-only text segments
 - **Contiguous allocation** — Each process occupies a contiguous region
@@ -102,6 +103,7 @@ struct map *mp;
 ```
 
 Algorithm (**first-fit**):
+
 1. Scan the map for a region ≥ requested size
 2. If found, allocate from the *start* of the region
 3. Shrink the region (or remove if empty)
@@ -215,6 +217,7 @@ main()
 ```
 
 How it works:
+
 1. Map user segment 0 to physical memory after the kernel
 2. Try to read byte 0 of that segment with `fubyte()`
 3. If successful, memory exists—clear it and add to `coremap`
@@ -267,6 +270,7 @@ estabur(nt, nd, ns)    /* text, data, stack sizes */
 ```
 
 First, verify the request is feasible:
+
 - No more than 8 segments total
 - Total memory ≤ available
 
@@ -458,6 +462,7 @@ If shrinking, just free the excess.
 ```
 
 If growing:
+
 1. Try to allocate larger region
 2. If successful, copy process to new location
 3. If not, swap out and let scheduler handle it
@@ -479,11 +484,13 @@ struct text {
 ```
 
 When a process execs a shared-text program:
+
 1. Look for existing text entry for this inode
 2. If found, just increment reference count
 3. If not, create new entry and load text from disk
 
 When process exits:
+
 1. Decrement reference counts
 2. When `x_count` reaches 0, text can be freed
 
@@ -498,6 +505,7 @@ From `param.h`:
 ```
 
 The `MAXMEM` limit exists because:
+
 - 64KB address space per process
 - Kernel reserves some segments
 - Practical limit on how much to allocate to one process
@@ -515,6 +523,7 @@ The `MAXMEM` limit exists because:
 ## Key Insight: Simplicity
 
 The UNIX v4 memory management is remarkably simple:
+
 - No page tables
 - No complex allocation algorithms
 - No memory-mapped files

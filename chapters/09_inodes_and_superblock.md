@@ -119,6 +119,7 @@ The `i_mode` field encodes file type and permissions:
 ```
 
 File types encoded in `IFMT`:
+
 - `000000` — Regular file
 - `040000` — Directory
 - `020000` — Character special
@@ -175,6 +176,7 @@ iinit()
 ```
 
 Key points:
+
 1. The superblock is read from disk block 1
 2. It's copied into a dedicated buffer that stays in memory
 3. The mount table entry records this buffer
@@ -257,6 +259,7 @@ If not in cache, use the free slot found during the search. Initialize the in-me
 ```
 
 The disk block containing the inode is calculated:
+
 - `ldiv(ino+31, 16)` gives the block number (16 inodes per block, offset by 2 for boot+super, so +31 adjusts for 1-based inode numbers)
 - `32*lrem(ino+31, 16)` gives the byte offset within the block
 
@@ -292,6 +295,7 @@ struct inode *p;
 ```
 
 When the last reference is released (`i_count` goes to 0):
+
 1. If link count is zero, the file is deleted—`itrunc()` frees data blocks, `ifree()` frees the inode
 2. `iupdat()` writes any pending changes to disk
 3. The inode slot is cleared for reuse
@@ -460,6 +464,7 @@ Superblock                Link Block 1              Link Block 2
 ```
 
 This design means:
+
 - Most allocations require no disk I/O (just decrement s_nfree)
 - The free list is rebuilt in batches, amortizing disk access
 
@@ -741,6 +746,7 @@ unlink("/tmp/foo")
 - **update** syncs everything to disk
 
 The elegance of this design:
+
 1. Most operations hit the in-memory cache
 2. Reference counting prevents premature deallocation
 3. The free block list amortizes disk I/O

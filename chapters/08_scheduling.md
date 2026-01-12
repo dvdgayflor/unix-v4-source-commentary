@@ -82,6 +82,7 @@ sleep(chan, pri)
 ```
 
 For interruptible sleeps (pri >= 0):
+
 1. Check for pending signals first
 2. Set wait channel and state SWAIT
 3. Context switch away
@@ -132,6 +133,7 @@ loop:
 ```
 
 `wakeup()` marks all processes sleeping on `chan` as runnable:
+
 1. Scan the process table for matching `p_wchan`
 2. Clear `p_wchan`, set `p_stat = SRUN`
 3. Increment `runrun` to trigger rescheduling
@@ -417,6 +419,7 @@ out:
 ```
 
 Once per second, if we're in user mode:
+
 1. Check for signals
 2. Decay the process's priority
 3. Call `swtch()` to potentially run another process
@@ -437,6 +440,7 @@ From `trap.c`:
 ```
 
 This creates a simple feedback loop:
+
 - Processes that use CPU time get lower priority
 - Processes that sleep get reset to high priority when they wake
 - I/O-bound processes naturally get better priority than CPU-bound
@@ -499,12 +503,14 @@ When `runrun` is set, `swtch()` is called at the next opportunity.
 ## The Beauty of Simplicity
 
 The entire scheduler fits in about 200 lines:
+
 - No run queues (just scan the proc table)
 - No complex priority inheritance
 - No real-time scheduling
 - Just: find highest priority, run it, age priorities
 
 This works because:
+
 - Only 50 processes maximum
 - Clock provides regular preemption
 - I/O-bound processes naturally get good priority

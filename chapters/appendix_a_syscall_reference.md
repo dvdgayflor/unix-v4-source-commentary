@@ -349,6 +349,7 @@ int dev;
 **Returns:** 0 on success, -1 on error
 
 **Description:** Create a special file (device node). Only superuser can create device nodes. The mode specifies the file type:
+
 - 040000 (IFDIR) - Directory
 - 020000 (IFCHR) - Character device
 - 060000 (IFBLK) - Block device
@@ -639,6 +640,7 @@ int *argp;
 **Returns:** 0 on success, -1 on error
 
 **Description:** Set terminal parameters. The structure contains:
+
 - Word 0: Input modes
 - Word 1: Output modes
 - Word 2: Erase and kill characters
@@ -818,6 +820,7 @@ int *buffer;
 **Returns:** 0
 
 **Description:** Get process times. Fills buffer with:
+
 - Word 0-1: User time of current process
 - Word 2-3: System time of current process
 - Word 4-5: Sum of children's user and system times

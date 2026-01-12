@@ -340,6 +340,7 @@ ADD instruction:
 ```
 
 The `cexpr()` function interprets template strings:
+
 - `A` — address of operand 1
 - `B` — address of operand 2
 - `R` — result register
@@ -368,6 +369,7 @@ optim(tree) {
 ```
 
 Optimizations include:
+
 - Constant folding
 - Strength reduction (multiply by power of 2 → shift)
 - Common subexpression handling
