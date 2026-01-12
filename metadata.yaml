@@ -1,7 +1,7 @@
 title: "The UNIX Fourth Edition Source Code Commentary"
 subtitle: "A Complete Guide to Understanding the UNIX v4 Operating System"
 author: "Briam Rodriguez"
-date: "20260112.002 Edition"
+date: "20260112.004 Edition"
 subject: "Operating Systems"
 keywords: [UNIX, PDP-11, Operating Systems, Source Code]
 lang: en
@@ -23,6 +23,13 @@ papersize: letter
 listings: true
 listings-no-page-break: false
 code-block-font-size: \scriptsize
+
+# Fonts - ensure proper monospace alignment for ASCII diagrams
+monofont: "Menlo"
+
+# Force fixed-width columns in code blocks
+header-includes: |
+  \lstset{columns=fixed, keepspaces=true}
 
 # Headers/footers
 header-left: "\\leftmark"
