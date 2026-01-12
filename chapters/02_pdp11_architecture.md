@@ -76,7 +76,7 @@ The PS register at address `0177776` contains the processor state:
 ```
  15 14 13 12 11 10  9  8  7  6  5  4  3  2  1  0
 +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
-|CM|PM|  RS |        |  IPL  | T| N| Z| V| C|
+| CM  | PM  | RS  |     |  IPL   | T| N| Z| V| C|
 +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
 
 CM    - Current Mode (00=kernel, 11=user)
@@ -186,12 +186,12 @@ Each segment has two registers:
 ```
  15 14 13 12 11 10  9  8  7  6  5  4  3  2  1  0
 +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
-|       PLF        |    |ED|ACF|  |
+|          PLF          |      |ED|  ACF   |     |
 +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
 
-PLF - Page Length Field (in 64-byte blocks)
-ED  - Expand Downward (1 for stack segments)
-ACF - Access Control Field (RO=2, RW=6)
+PLF  Page Length Field (in 64-byte blocks)
+ED   Expand Downward (1 for stack segments)
+ACF  Access Control Field (RO=2, RW=6)
 ```
 
 ### Address Translation

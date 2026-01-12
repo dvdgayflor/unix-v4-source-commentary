@@ -35,13 +35,20 @@ sudo apt install pandoc texlive-latex-recommended texlive-fonts-recommended \
                  texlive-latex-extra texlive-fonts-extra texlive-xetex
 ```
 
-**Eisvogel template:**
+**Eisvogel template (required):**
 
 ```bash
 mkdir -p ~/.pandoc/templates
-curl -L https://github.com/Wandmalfarbe/pandoc-latex-template/releases/latest/download/Eisvogel.tar.gz \
-  | tar xz -C ~/.pandoc/templates
-cp ~/.pandoc/templates/Eisvogel-*/eisvogel.latex ~/.pandoc/templates/
+cd ~/.pandoc/templates
+curl -LO https://github.com/Wandmalfarbe/pandoc-latex-template/releases/latest/download/Eisvogel.tar.gz
+tar xzf Eisvogel.tar.gz
+cp Eisvogel-*/eisvogel.latex .
+rm -rf Eisvogel.tar.gz Eisvogel-*/
+```
+
+Verify installation:
+```bash
+ls ~/.pandoc/templates/eisvogel.latex
 ```
 
 ### Generate PDF
