@@ -74,6 +74,9 @@ add_chapter chapters/appendix_c_pdp11_reference.md >> build/combined.md
 add_chapter chapters/appendix_d_glossary.md >> build/combined.md
 add_chapter chapters/appendix_e_running_v4.md >> build/combined.md
 
+# About the Author
+add_chapter chapters/about_the_author.md >> build/combined.md
+
 echo "Generating PDF with Pandoc..."
 
 pandoc build/combined.md \
