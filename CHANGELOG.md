@@ -23,6 +23,7 @@
 - Footnote on PDP-11 local labels (f/b notation for branches) (Chapter 17)
 
 ### Fixed
+- Back cover spacing: reduced vertical space above Ritchie quote
 - Inode mode field ASCII diagram: replaced broken art with proper bit-field diagram and tree annotations
 - Block addressing: corrected "13-bit packed format" to "16-bit integers" (3-byte packing was v6, not v4)
 - smdate (syscall 30): corrected from 2 args to 1 arg per actual sysent.c
