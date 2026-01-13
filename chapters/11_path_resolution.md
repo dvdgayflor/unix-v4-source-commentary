@@ -119,6 +119,8 @@ The starting point depends on the first character:
 
 `iget()` is called to get a locked, reference-counted copy of the starting directory.
 
+\newpage
+
 ### Main Loop (cloop)
 
 ```c

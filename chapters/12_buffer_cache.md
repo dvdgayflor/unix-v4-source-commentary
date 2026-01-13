@@ -564,6 +564,8 @@ The buffer cache calls device drivers through the strategy routine:
 
 The driver queues the request, starts the device if idle, and returns immediately. When I/O completes, the device interrupt handler calls `iodone(bp)`.
 
+\newpage
+
 ## Complete Read Flow
 
 ```

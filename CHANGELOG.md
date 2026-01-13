@@ -1,5 +1,29 @@
 # Changelog
 
+## 2026-01-13
+
+### Added
+- Dedication haiku in front matter
+- Footnote linking to squoze.net for UNIX v4 source code availability
+- Missing trap vectors br7+7 through br7+9 (vectors 240, 244, 250) in Chapter 7
+- Complete system call reference: added 19 missing syscalls from sysent.c
+- Blockquote explaining 512-byte block size rationale (Chapter 9)
+- Blockquote explaining inode count formula from mkfs.c (Chapter 9)
+- Blockquote explaining small/large file algorithm tradeoff (Chapter 10)
+- Blockquote explaining canonicalization and canon() function (Chapter 13)
+- Blockquote explaining octal convention on PDP-11 (Chapter 13)
+- Blockquote on elevator algorithm history in computer science (Chapter 14)
+
+### Fixed
+- RK05 disk capacity: 2.4 MB → 2.38 MiB (correct math: 203×2×12×512 bytes)
+- Flow control diagram in Chapter 13: converted Unicode to pure ASCII
+- Special character rendering: `#`, `@`, `Ctrl-D` now use code formatting
+- `Ctrl-\` rendering: wrapped in backticks to prevent backslash escaping
+- malloc() free list table: added column headers (Size | Addr) for clarity
+
+### Changed
+- Page breaks added for improved layout: sections 6.4, 6.7, 7.10, 11.7.2, 12.18, 13.4, 14.8
+
 ## 2026-01-12
 
 ### Added

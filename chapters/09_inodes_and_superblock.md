@@ -38,6 +38,14 @@ Block M     ┘
 
 Each block is 512 bytes. The number of inode blocks depends on the file system size—the superblock's `s_isize` field records this.
 
+\vspace{1em}
+
+> **Why 512 bytes?** The block size matches the RK05 disk's physical sector size (256 words × 2 bytes = 512 bytes). This makes I/O efficient—one block equals one sector equals one disk operation. The power-of-2 size also makes offset calculations fast (bit shifts instead of division), and with only 64KB of address space, larger buffers would waste precious memory.
+
+\vspace{1em}
+
+> **How many inodes?** The `mkfs` utility calculates inode blocks using: `s_isize = fsize / (43 + fsize/1000)`. For an RK05 with ~4800 blocks, this yields ~100 inode blocks = 1600 inodes (16 per block). The formula allocates roughly 1 inode per 3 data blocks, or about 1 inode per 1.5KB—enough for typical small UNIX files.
+
 ### On-Disk Inode Format
 
 Each on-disk inode is 32 bytes:

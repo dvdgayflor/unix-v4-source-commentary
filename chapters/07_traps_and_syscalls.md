@@ -45,6 +45,11 @@ From `low.s`:
     trap; br7+4.     / 24: power fail
     trap; br7+5.     / 30: EMT (emulator trap)
     trap; br7+6.     / 34: system call (TRAP instruction)
+
+. = 240^.
+    trap; br7+7.     / 240: programmed interrupt
+    trap; br7+8.     / 244: floating point exception
+    trap; br7+9.     / 250: segmentation violation
 ```
 
 Each vector is two words:
@@ -353,6 +358,8 @@ char *buf;
 }
 ```
 
+\newpage
+
 ## Complete System Call Flow
 
 ```
@@ -441,6 +448,7 @@ int (*f)();
 
 | # | Name | Args | Description |
 |---|------|------|-------------|
+| 0 | indir | 0 | Indirect syscall |
 | 1 | exit | 0 | Terminate process |
 | 2 | fork | 0 | Create child process |
 | 3 | read | 2 | Read from file |
@@ -457,11 +465,29 @@ int (*f)();
 | 14 | mknod | 3 | Make device node |
 | 15 | chmod | 2 | Change mode |
 | 16 | chown | 2 | Change owner |
-| 17 | break | 1 | Change memory size |
+| 17 | break | 1 | Change memory size (sbrk) |
 | 18 | stat | 2 | Get file status |
 | 19 | seek | 2 | Seek in file |
+| 21 | mount | 3 | Mount filesystem |
+| 22 | umount | 1 | Unmount filesystem |
+| 23 | setuid | 0 | Set user ID |
+| 24 | getuid | 0 | Get user ID |
+| 25 | stime | 0 | Set system time |
+| 28 | fstat | 1 | Get file status (by fd) |
+| 30 | smdate | 1 | Set modification date |
+| 31 | stty | 1 | Set terminal parameters |
+| 32 | gtty | 1 | Get terminal parameters |
+| 34 | nice | 0 | Set process priority |
+| 35 | sleep | 0 | Sleep for interval |
+| 36 | sync | 0 | Flush filesystem buffers |
+| 37 | kill | 1 | Send signal to process |
+| 38 | switch | 0 | Get console switches |
 | 41 | dup | 0 | Duplicate fd |
 | 42 | pipe | 0 | Create pipe |
+| 43 | times | 1 | Get process times |
+| 44 | prof | 4 | Profiling control |
+| 46 | setgid | 0 | Set group ID |
+| 47 | getgid | 0 | Get group ID |
 | 48 | signal | 2 | Set signal handler |
 
 ## Experiments

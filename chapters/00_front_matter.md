@@ -1,3 +1,15 @@
+\vspace*{\fill}
+
+\begin{center}
+\textit{This book a labor,\\
+Of love for my dear mother,\\
+And all of mankind.}
+\end{center}
+
+\vspace*{\fill}
+
+\newpage
+
 # The UNIX Fourth Edition Source Code Commentary {-}
 
 **A Complete Guide to Understanding the UNIX v4 Operating System**
@@ -191,6 +203,8 @@ Timeline of recovery (from Angelo Papenhoff's 39C3 presentation):
 
 ---
 
+\newpage
+
 ## How to Use This Book {-}
 
 ### For Sequential Reading
@@ -203,7 +217,9 @@ If you're already familiar with operating systems and want to understand specifi
 
 ### With the Source Code
 
-This book is meant to be read alongside the actual source code. Keep the `unix_v4/` directory open and follow along. The code is small enough that you can (and should) read all of it.
+This book is meant to be read alongside the actual source code. Keep the `unix_v4/` directory[^squoze] open and follow along. The code is small enough that you can (and should) read all of it.
+
+[^squoze]: The `unix_v4/` directory refers to the UNIX v4 source code available from [squoze.net](https://squoze.net), where Angelo Papenhoff has made the restored source code available for download.
 
 ---
 

@@ -19,6 +19,8 @@ This is surprisingly complex code because it must handle the mismatch between hu
 - Chapter 10: File I/O (`passc`, `cpass`)
 - Character device interface basics
 
+\newpage
+
 ## The TTY Structure
 
 ```c
@@ -61,6 +63,10 @@ Process ────────────────────►│  t_ou
 **t_canq** (canonical queue): Completed, edited lines ready for the application.
 
 **t_outq** (output queue): Characters waiting to be displayed.
+
+\vspace{1em}
+
+> **What is canonicalization?** The `canon()` function transforms raw input into "canonical" form—a complete, edited line. This means processing backspace (erase the previous character), kill (erase the entire line), and recognizing end-of-line (newline or EOT). The term comes from "canonical form" in mathematics: a standard, simplified representation. In UNIX, canonical input is line-buffered, edited text ready for applications that expect to read complete lines, as opposed to raw input which is character-by-character with no editing.
 
 ### Character Lists (clist)
 
@@ -114,7 +120,7 @@ Characters are stored in linked lists of 6-character blocks. This allows queues 
 #define CEOT    004     /* End of file (Ctrl-D) */
 ```
 
-The quit character (Ctrl-\) and interrupt character (DEL) are stored in the tty structure and can be changed per-terminal.
+The quit character (`Ctrl-\`) and interrupt character (DEL) are stored in the tty structure and can be changed per-terminal.
 
 ## cinit() — Initialize Character Lists
 
@@ -174,7 +180,7 @@ Strip to 7 bits. If CRMOD is set, convert carriage return to newline.
     }
 ```
 
-In cooked mode, check for interrupt (DEL) or quit (Ctrl-\). Send the appropriate signal and flush all queues.
+In cooked mode, check for interrupt (DEL) or quit (`Ctrl-\`). Send the appropriate signal and flush all queues.
 
 ```c
     if (tp->t_rawq.c_cc>=TTYHOG) {
@@ -266,11 +272,15 @@ Read characters from raw queue until the delimiter (0377).
             }
 ```
 
+\newpage
+
+> **Why octal?** The delimiter 0377 is 255 decimal (0xFF hex). PDP-11 programmers used octal because the machine's architecture favored it: registers are numbered 0-7 (3 bits), instruction fields are 3 bits wide, and the front panel switches were grouped in threes. You could read `MOV R1,R2` directly from its encoding `010102`. DEC's earlier 12-bit machines (PDP-8) divided perfectly into 4 octal digits, establishing the convention. Hexadecimal dominance came later with 8-bit byte-oriented architectures.
+
 Process editing characters:
 
-- **#** (CERASE): Back up one character
-- **@** (CKILL): Discard entire line, start over
-- **Ctrl-D** (CEOT): Mark end of file but don't include in output
+- `#` (CERASE): Back up one character
+- `@` (CKILL): Discard entire line, start over
+- `Ctrl-D` (CEOT): Mark end of file but don't include in output
 
 ```c
             } else
@@ -600,15 +610,13 @@ Used by `stty` and `gtty` system calls.
 ## Flow Control
 
 ```
-                    TTHIWAT (50)
-                        │
-Output Queue ──────────┼──────────── ttwrite() sleeps
-                        │
-                    TTLOWAT (30)
-                        │
-                   ─────┼──────────── klxint() wakes writers
-                        │
-                        0
+    Output Queue Level
+
+    50 +-- TTHIWAT -- ttwrite() sleeps
+       |
+    30 +-- TTLOWAT -- klxint() wakes writers
+       |
+     0 +-- Empty
 ```
 
 When the output queue exceeds 50 characters, writers sleep. When it drops to 30 or below, they're awakened. This prevents fast writers from flooding slow terminals.
@@ -636,7 +644,7 @@ if ((t_flags&RAW)==0 && (c==tp->t_quit || c==tp->t_intrup)) {
 In cooked mode:
 
 - **DEL** (0177) → SIGINT (interrupt)
-- **Ctrl-\** (034) → SIGQIT (quit with core dump)
+- **`Ctrl-\`** (034) → SIGQIT (quit with core dump)
 
 The `signal()` function sends the signal to all processes with this controlling terminal.
 

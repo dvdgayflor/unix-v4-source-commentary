@@ -19,6 +19,8 @@ UNIX v4 manages memory with elegant simplicity. There's no virtual memory in the
 - Chapter 2: PDP-11 Architecture (MMU, segments)
 - Chapter 5: Process Management (process structure)
 
+\newpage
+
 ## The Memory Model
 
 UNIX v4 uses a simple model:
@@ -112,12 +114,14 @@ Algorithm (**first-fit**):
 Example — allocating 3 blocks:
 
 ```
-Before:             After:
-| 5 | 100 |         | 2 | 103 |
-| 3 | 200 |    →    | 3 | 200 |
-| 0 |     |         | 0 |     |
+Before:              After:
+Size | Addr          Size | Addr
+-----+-----          -----+-----
+  5  | 100             2  | 103
+  3  | 200    ->       3  | 200
+  0  |                 0  |
 
-Returns: 100
+Returns: 100 (allocated blocks 100-102)
 ```
 
 ### mfree() — Free to Map
@@ -178,10 +182,12 @@ If can't merge, insert a new entry (shifting subsequent entries).
 Example — freeing 2 blocks at address 105:
 
 ```
-Before:             After:
-| 2 | 103 |         | 4 | 103 |    (merged!)
-| 3 | 200 |    →    | 3 | 200 |
-| 0 |     |         | 0 |     |
+Before:              After:
+Size | Addr          Size | Addr
+-----+-----          -----+-----
+  2  | 103             4  | 103    (merged: 103-104 + 105-106 = 103-106)
+  3  | 200    ->       3  | 200
+  0  |                 0  |
 ```
 
 ### Coalescing
@@ -225,6 +231,8 @@ How it works:
 5. When `fubyte()` fails (returns -1), we've hit non-existent memory
 
 After the loop, `coremap` contains one large free region starting just after the kernel.
+
+\newpage
 
 ## Process Memory Layout
 

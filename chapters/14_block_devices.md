@@ -2,7 +2,7 @@
 
 ## Overview
 
-Block devices transfer data in fixed-size blocks (512 bytes in UNIX v4) and support random access. The primary block device is the disk—the RK05 cartridge disk that holds 2.4 megabytes on a removable pack. Block devices go through the buffer cache, providing caching and a uniform interface that hides the complexity of disk geometry and timing.
+Block devices transfer data in fixed-size blocks (512 bytes in UNIX v4) and support random access. The primary block device is the disk—the RK05 cartridge disk that holds 2.38 MiB on a removable pack. Block devices go through the buffer cache, providing caching and a uniform interface that hides the complexity of disk geometry and timing.
 
 This chapter examines the RK05 disk driver as a case study in block device implementation.
 
@@ -63,7 +63,7 @@ For example, device 0407 = major 04, minor 07 = RK disk, unit 7.
 
 The RK05 is a cartridge disk:
 
-- **Capacity**: 2.4 MB per pack
+- **Capacity**: 2.38 MiB per pack
 - **Geometry**: 203 cylinders × 2 surfaces × 12 sectors
 - **Block size**: 512 bytes (256 words)
 - **Total blocks**: 4,872 per disk
@@ -74,7 +74,7 @@ The RK05 is a cartridge disk:
         │  ┌───────────────┐  │
         │  │ Removable     │  │
         │  │ Cartridge     │  │
-        │  │  2.4 MB       │  │
+        │  │  2.38 MiB     │  │
         │  └───────────────┘  │
         └─────────────────────┘
 ```
@@ -167,6 +167,12 @@ ret:
 ```
 
 **Elevator algorithm**: Insert the request in sorted order by block number. This minimizes seek time by processing requests in the direction the head is moving, like an elevator.
+
+\vspace{1em}
+
+> **The Elevator Algorithm in CS History.** Also known as SCAN, the elevator algorithm is one of the foundational disk scheduling algorithms. The name comes from its behavior: like an elevator, the disk head services requests in one direction until exhausted, then reverses. First-come-first-served (FCFS) scheduling causes the head to thrash wildly across the platter; elevator ordering dramatically reduces average seek time. Variants include C-SCAN (circular scan, always sweeping in one direction) and LOOK (reversing at the last request rather than the disk edge). With the rise of SSDs—which have no mechanical seek time—elevator scheduling became irrelevant for flash storage, but it remains essential for understanding I/O scheduling principles and is still used in systems with rotational media.
+
+\newpage
 
 ## rkstart() — Initiate Seeks
 

@@ -569,6 +569,10 @@ Large file (ILARG=1):
   Max: 8 × 256 = 2048 blocks = 1MB
 ```
 
+\vspace{1em}
+
+> **Why two algorithms?** Most UNIX files are small—configuration files, source code, shell scripts. The small file algorithm optimizes for this common case: direct block pointers mean zero extra disk reads to locate data. Large files are rare but must be supported, so the indirect scheme kicks in only when needed, adding just one extra disk read per access. This design keeps inodes compact (only 8 pointers) while still supporting files up to 1MB—a practical tradeoff for 1973 when a 2.4MB RK05 disk was the entire filesystem.
+
 ## Data Transfer: iomove()
 
 ```c
