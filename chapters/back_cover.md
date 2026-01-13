@@ -1,7 +1,7 @@
 \newpage
 \thispagestyle{empty}
 
-\vspace*{\fill}
+\vspace*{2em}
 
 \begin{center}
 \Large\textbf{The UNIX Fourth Edition Source Code Commentary}

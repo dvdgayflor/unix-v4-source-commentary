@@ -5,13 +5,21 @@ cd "$(dirname "$0")/.."
 
 mkdir -p build
 
-# Auto-increment version
-VERSION=$(cat VERSION)
-NEW_VERSION=$((VERSION + 1))
-echo $NEW_VERSION > VERSION
+# Auto-increment version, reset to 0 on date change
+DATE=$(date +%Y%m%d)
+VERSION_DATA=$(cat VERSION)
+LAST_DATE=$(echo "$VERSION_DATA" | cut -d: -f1)
+LAST_VERSION=$(echo "$VERSION_DATA" | cut -d: -f2)
+
+if [ "$DATE" = "$LAST_DATE" ]; then
+    NEW_VERSION=$((LAST_VERSION + 1))
+else
+    NEW_VERSION=0
+fi
+
+echo "$DATE:$NEW_VERSION" > VERSION
 
 # Generate version string: YYYYMMDD.NNN Edition
-DATE=$(date +%Y%m%d)
 VERSION_STRING=$(printf "%s.%03d Edition" "$DATE" "$NEW_VERSION")
 
 echo "Building version: $VERSION_STRING"

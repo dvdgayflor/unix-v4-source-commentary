@@ -61,6 +61,17 @@ make pdf
 
 The PDF will be generated at `build/unix_v4_commentary.pdf`.
 
+### Print-Ready PDF
+
+To create a print-optimized PDF with embedded fonts and prepress settings:
+
+```bash
+make pdf
+make print
+```
+
+This generates `unix_v4_commentary_print.pdf` with PDF 1.4 compatibility, embedded/subsetted fonts, and prepress quality settings suitable for print-on-demand services. Note: run `make pdf` first, as `make print` processes the existing build without rebuilding.
+
 ## Project Structure
 
 ```

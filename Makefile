@@ -3,7 +3,7 @@
 pdf:
 	@./scripts/build-pdf.sh
 
-print: pdf
+print:
 	@echo "Creating print-ready PDF..."
 	@DISPLAY= gs -dBATCH -dNOPAUSE -dSAFER \
 		-sDEVICE=pdfwrite \
