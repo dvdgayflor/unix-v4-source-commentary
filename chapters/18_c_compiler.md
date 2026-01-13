@@ -66,6 +66,8 @@ Object (.o)
 Executable (a.out)
 ```
 
+\newpage
+
 ## Pass 0: Lexical Analysis
 
 ### Keyword Table
@@ -374,6 +376,8 @@ Optimizations include:
 - Strength reduction (multiply by power of 2 → shift)
 - Common subexpression handling
 - Register allocation
+
+\newpage
 
 ## Type System
 

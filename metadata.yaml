@@ -1,7 +1,7 @@
 title: "The UNIX Fourth Edition Source Code Commentary"
 subtitle: "A Complete Guide to Understanding the UNIX v4 Operating System"
 author: "Briam Rodriguez"
-date: "20260113.055 Edition"
+date: "20260113.081 Edition"
 subject: "Operating Systems"
 keywords: [UNIX, PDP-11, Operating Systems, Source Code]
 lang: en
@@ -31,6 +31,7 @@ monofont: "Menlo"
 # Widen TOC number column to prevent collisions with titles
 header-includes: |
   \lstset{columns=fixed, keepspaces=true}
+  \usepackage{graphicx}
   \usepackage{tocloft}
   \setlength{\cftchapnumwidth}{3em}
   \setlength{\cftsecnumwidth}{3.5em}

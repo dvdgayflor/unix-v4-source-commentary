@@ -71,6 +71,8 @@ char setintr;        /* Interactive mode flag */
 #define tlst 4       /* List (cmd; cmd) */
 ```
 
+\newpage
+
 ## main() — Shell Startup
 
 ```c
@@ -248,7 +250,38 @@ Handle `\` escapes and `$1`, `$2`, etc. parameter expansion.
 
 ## Parsing: Recursive Descent
 
-The parser builds a syntax tree using recursive descent:
+The parser builds a syntax tree using recursive descent—a parsing technique where each grammar rule becomes a function, and functions call each other to match the input structure. The beauty of recursive descent is that the code mirrors the grammar directly.
+
+**Parser Call Hierarchy:**
+
+```
+                        syntax()
+                           |
+                           v
+       syn1() ─────── handles ; and & (command lists)
+                           |
+                           v
+       syn2() ─────── handles | (pipelines)
+                           |
+                           v
+       syn3() ─────── simple commands, (subshells), redirects
+```
+
+Each level handles operators of a specific precedence. Lower precedence operators (`;`, `&`) are parsed first at the top, so they become the root of the tree. Higher precedence operators (`|`) bind tighter and appear deeper.
+
+**Example Parse Tree** for `ls | grep foo; echo done`:
+
+```
+                      tlst (;)
+                     /        \
+                tfil (|)      tcom
+               /      \      "echo"
+            tcom     tcom    "done"
+            "ls"    "grep"
+                    "foo"
+```
+
+The tree is executed bottom-up, left-to-right: first the pipeline `ls | grep foo` runs, then `echo done`.
 
 ### syntax() — Top Level
 
@@ -558,6 +591,10 @@ seek(i, 0, 2);        /* Seek to end */
 close(1);
 dup(i);
 ```
+
+> **Classic UNIX Technique.** The `close(1); dup(i);` idiom works because `dup()` always returns the lowest available file descriptor. After `close(1)` frees stdout, `dup(i)` duplicates `i` into slot 1—effectively redirecting stdout to the file. The order is critical: `dup(i); close(1);` would duplicate to some random slot, then close stdout, achieving nothing useful. This "lowest available" guarantee is baked into the UNIX design and appears throughout early system code.
+
+\newpage
 
 ## Pipes
 

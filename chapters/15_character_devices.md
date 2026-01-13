@@ -18,6 +18,8 @@ This chapter examines the memory pseudo-devices—elegant examples of the charac
 - Chapter 10: File I/O (`passc`, `cpass`, `u.u_offset`)
 - Chapter 13: TTY Subsystem (character device example)
 
+\newpage
+
 ## The Character Device Switch
 
 ```c
@@ -43,6 +45,8 @@ struct cdevsw cdevsw[] {
 };
 ```
 
+> **Why "switch"?** The term "switch" in `cdevsw` doesn't mean a toggle—it refers to a dispatch table, like a `switch` statement in C. When the kernel needs to perform an operation on a character device, it uses the major device number as an index into `cdevsw` and "switches" to the appropriate driver function: `(*cdevsw[major].d_read)(dev)`. It's a jump table that routes calls to the right driver.
+
 ## Block vs Character Devices
 
 | Aspect | Block Device | Character Device |
@@ -57,6 +61,8 @@ Many devices have both interfaces:
 
 - `/dev/rk0` — Block device (buffered)
 - `/dev/rrk0` — Character device (raw, unbuffered)
+
+\newpage
 
 ## The Memory Devices
 
@@ -238,6 +244,8 @@ pcread()   /* Read from paper tape reader */
 pcwrite()  /* Write to paper tape punch */
 ```
 
+\newpage
+
 ### Raw Disk (rk.c)
 
 ```c
@@ -278,6 +286,8 @@ struct cdevsw cdevsw[] {
 ```
 
 The `mknod` command creates special files that point to device drivers through major/minor numbers.
+
+\newpage
 
 ## Summary
 

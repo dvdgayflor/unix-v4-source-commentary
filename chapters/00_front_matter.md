@@ -1,9 +1,14 @@
+\null
 \vspace*{\fill}
 
 \begin{center}
 \textit{This book a labor,\\
 Of love for my dear mother,\\
 And all of mankind.}
+
+\vspace{1em}
+
+\includegraphics[width=0.5\textwidth]{images/zen.png}
 \end{center}
 
 \vspace*{\fill}

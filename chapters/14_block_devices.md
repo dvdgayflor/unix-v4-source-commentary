@@ -420,6 +420,8 @@ bread(dev, blkno)
             return buffer
 ```
 
+\newpage
+
 ### Raw Read
 
 ```
@@ -467,12 +469,14 @@ rkerror()
 
 On error: reset controller, recalibrate all drives that were seeking. The strategy routine will retry up to 10 times before giving up.
 
+\newpage
+
 ## Multiple Drives
 
 ```
            rk_q[0]        rk_q[1]        rk_q[2]        rk_q[3]
            ┌─────┐        ┌─────┐        ┌─────┐        ┌─────┐
-           │ bp  │───►    │ bp  │───►    │NULL │        │ bp  │───►
+           │ bp  │        │ bp  │        │NULL │        │ bp  │
            └─────┘        └─────┘        └─────┘        └─────┘
               │              │                             │
               ▼              ▼                             ▼

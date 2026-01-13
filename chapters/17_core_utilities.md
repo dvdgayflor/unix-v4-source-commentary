@@ -18,6 +18,8 @@ UNIX comes with dozens of small, focused utilities that work together through pi
 - Chapter 2: PDP-11 Architecture (for assembly)
 - Chapter 7: System Calls (`open`, `read`, `write`, `stat`)
 
+\newpage
+
 ## echo — The Simplest Utility
 
 ```c
@@ -43,7 +45,9 @@ hello world
 
 ## cat — Concatenate Files (Assembly)
 
-`cat` is written in assembly for efficiency—it's used constantly:
+`cat` is written in assembly for efficiency—it's used constantly.[^local-labels]
+
+[^local-labels]: The branch targets like `3f` and `2b` are local labels in PDP-11 assembly. The number (1-9) is the label name; `f` means "forward" (find the next occurrence ahead) and `b` means "backward" (find the previous occurrence behind). So `beq 3f` branches to the next `3:` label, and `br 1b` loops back to the previous `1:`. This lets you reuse simple numeric labels without inventing unique names.
 
 ```assembly
 / cat -- concatenate files
@@ -288,6 +292,8 @@ char *dir;
 
 Directories are just files with 16-byte entries (2-byte inode + 14-byte name).
 
+\newpage
+
 ### Getting File Information
 
 ```c
@@ -380,6 +386,8 @@ write(1, string, length);
 /* Using printf (links with library) */
 printf("%s\n", string);
 ```
+
+\newpage
 
 ## Assembly vs C Trade-offs
 
