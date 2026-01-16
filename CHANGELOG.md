@@ -1,5 +1,10 @@
 # Changelog
 
+## 2026-01-16
+
+### Fixed
+- icode array comments: corrected PDP-11 byte order in string encoding (Chapter 4) — *Lysander Trischler*
+
 ## 2026-01-13
 
 ### Added

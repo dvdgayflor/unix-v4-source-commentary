@@ -10,3 +10,6 @@ unix_v4_commentary_print.pdf
 
 # Project planning docs
 meta/
+
+# Submitted patches (applied or pending review)
+patches/
